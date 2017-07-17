@@ -1,0 +1,49 @@
+{
+  "name": "dva-subscribe",
+  "version": "0.0.1",
+  "description": "A helper function to simplify the subscription of history in dva. ",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf lib && babel src --out-dir lib",
+    "test": "mocha test/*.spec.js --compilers js:babel-core/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ma63d/dva-subscribe.git"
+  },
+  "keywords": [
+    "dva",
+    "history",
+    "subscription"
+  ],
+  "author": "Chuck Liu <chuck7liu@gmail.com, chuckliu.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ma63d/dva-subscribe/issues"
+  },
+  "homepage": "https://github.com/Ma63d/dva-subscribe#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.1.0",
+    "chai-spies": "git://github.com/chaijs/chai-spies.git#master",
+    "eslint": "^4.2.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "history": "^4.6.3",
+    "jsdom": "^11.1.0",
+    "mocha": "^3.4.2",
+    "mocha-jsdom": "^1.1.0",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "path-to-regexp": "^1.7.0"
+  },
+  "peerDependencies": {
+    "dva": "^1.0.0"
+  }
+}
