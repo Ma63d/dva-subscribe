@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
     "test": "mocha test/*.spec.js --compilers js:babel-core/register",
-    "report": "cross-env NODE_ENV=test nyc --reporter=html mocha test/*.spec.js"
+    "report": "cross-env NODE_ENV=test nyc --reporter=html mocha test/*.spec.js",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",

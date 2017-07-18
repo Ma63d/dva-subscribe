@@ -1,10 +1,11 @@
 # dva-subscribe
+[![Build Status](https://travis-ci.org/Ma63d/dva-subscribe.svg?branch=master)](https://travis-ci.org/Ma63d/dva-subscribe)
+[![Coverage Status](https://coveralls.io/repos/github/Ma63d/dva-subscribe/badge.svg)](https://coveralls.io/github/Ma63d/dva-subscribe)
 
 A helper function which can simplify the subscription of history in [dva](https://github.com/dvajs/dva).
 
 ## Usage
 
-### basic usage
 ```javascript
 import subscribe from 'dva-subscribe'
 
