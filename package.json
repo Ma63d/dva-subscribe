@@ -1,6 +1,6 @@
 {
   "name": "dva-subscribe",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A helper function to simplify the subscription of history in dva. ",
   "main": "index.js",
   "scripts": {
