@@ -137,7 +137,35 @@ describe('subscribe to history', function() {
         })
         history.update(newLocation)
 
+        newLocation = new Location('/schools/1/classes/3/students', {
+            gender: 'female'
+        })
+        history.update(newLocation)
+
+        newLocation = new Location('/schools/1/classes/3/students', {
+            gender: 'male'
+        })
+        history.update(newLocation)
+
         expect(spiedActionCreator).to.have.been.called.with('1', '2', 'female')
+        expect(dispatch).to.have.been.called.with({
+            type: 'fetch',
+            payload: {
+                sid: '1',
+                cid: '2',
+                gender: 'female'
+            }
+        })
+        expect(spiedActionCreator).to.have.been.called.with('1', '3', 'female')
+        expect(dispatch).to.have.been.called.with({
+            type: 'fetch',
+            payload: {
+                sid: '1',
+                cid: '2',
+                gender: 'female'
+            }
+        })
+        expect(spiedActionCreator).to.have.been.called.with('1', '3', 'male')
         expect(dispatch).to.have.been.called.with({
             type: 'fetch',
             payload: {
@@ -181,6 +209,8 @@ describe('subscribe to history', function() {
             gender: 'female',
             lastname: 'Zhang'
         })
+        history.update(location)
+        history.update(location)
         history.update(location)
 
         expect(spiedActionCreator).to.have.been.called.once

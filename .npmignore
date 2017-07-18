@@ -11,3 +11,5 @@ npm-debug.log
 .editorconfig
 .eslintrc.js
 img
+coverage
+.nyc_output

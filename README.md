@@ -61,10 +61,10 @@ subscriptions: {
 
 ## Parameters
 
-```javascript
+```
   @param {Object} history, react-router history
   @param {Function} dispatch, dva's dispatch
-  @param {Object} rules, spread arguments, optional,
+  @param {Object} rules, rest arguments, optional,
     rule {Object}, { url: '...', queries: [...], actionCreator: (...) => {...}, everyTime: true/false }
       property {String} url
            the url pattern, etc '/a/:b/:c/x'
