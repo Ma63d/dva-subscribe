@@ -1,6 +1,7 @@
 # dva-subscribe
 [![Build Status](https://travis-ci.org/Ma63d/dva-subscribe.svg?branch=master)](https://travis-ci.org/Ma63d/dva-subscribe)
 [![Coverage Status](https://coveralls.io/repos/github/Ma63d/dva-subscribe/badge.svg)](https://coveralls.io/github/Ma63d/dva-subscribe)
+[![NPM downloads](https://img.shields.io/npm/v/dva-subscribe.svg)](https://npmjs.org/package/dva-subscribe)
 
 A helper function which can simplify the subscription of history in [dva](https://github.com/dvajs/dva).
 
