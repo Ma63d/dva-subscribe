@@ -22,9 +22,6 @@ describe('subscribe to history', function() {
             actionCreator: spiedActionCreator
         })
 
-        expect(spiedActionCreator).to.not.have.been.called()
-        expect(dispatch).to.not.have.been.called()
-
         // url changed
         let newLocation = new Location('/index')
         history.update(newLocation)
@@ -46,15 +43,19 @@ describe('subscribe to history', function() {
         }, {
             url: '/home',
             actionCreator: spyOfHome
+        }, {
+            url: '/detail',
+            actionCreator: spyOfDetail
+        }, {
+            url: '/list',
+            actionCreator: spyOfList
         })
-            .listen({
-                url: '/detail',
-                actionCreator: spyOfDetail
-            })
-            .listen({
-                url: '/list',
-                actionCreator: spyOfList
-            })
+
+        expect(spyOfIndex).to.not.have.been.called()
+        expect(spyOfHome).to.not.have.been.called()
+        expect(spyOfDetail).to.not.have.been.called()
+        expect(spyOfList).to.not.have.been.called()
+        expect(dispatch).to.not.have.been.called()
 
         // url changed twice
         let newLocation = new Location('/index')
@@ -76,11 +77,10 @@ describe('subscribe to history', function() {
         let actionCreator = () => ({})
         let spiedActionCreator = chai.spy(actionCreator)
 
-        subscribe(history, dispatch)
-            .listen({
-                url: '/index',
-                actionCreator: spiedActionCreator
-            })
+        subscribe(history, dispatch, {
+            url: '/index',
+            actionCreator: spiedActionCreator
+        })
 
         history.update(new Location('/home'))
 
@@ -125,12 +125,11 @@ describe('subscribe to history', function() {
             }
         )
 
-        subscribe(history, dispatch)
-            .listen({
-                url: '/schools/:sid/classes/:cid/students',
-                queries: ['gender'],
-                actionCreator: spiedActionCreator
-            })
+        subscribe(history, dispatch, {
+            url: '/schools/:sid/classes/:cid/students',
+            queries: ['gender'],
+            actionCreator: spiedActionCreator
+        })
 
         let newLocation = new Location('/schools/1/classes/2/students', {
             gender: 'female'
@@ -191,12 +190,11 @@ describe('subscribe to history', function() {
             }
         )
 
-        subscribe(history, dispatch)
-            .listen({
-                url: '/schools/:sid/classes/:cid/students',
-                queries: ['gender'],
-                actionCreator: spiedActionCreator
-            })
+        subscribe(history, dispatch, {
+            url: '/schools/:sid/classes/:cid/students',
+            queries: ['gender'],
+            actionCreator: spiedActionCreator
+        })
 
         // initial url
         let location = new Location('/schools/1/classes/2/students', {
@@ -232,13 +230,12 @@ describe('subscribe to history', function() {
             }
         )
 
-        subscribe(history, dispatch)
-            .listen({
-                url: '/schools/:sid/classes/:cid/students',
-                queries: ['gender'],
-                actionCreator: spiedActionCreator,
-                everyTime: true
-            })
+        subscribe(history, dispatch, {
+            url: '/schools/:sid/classes/:cid/students',
+            queries: ['gender'],
+            actionCreator: spiedActionCreator,
+            everyTime: true
+        })
 
         // initial url
         let location = new Location('/schools/1/classes/2/students', {
@@ -256,11 +253,10 @@ describe('subscribe to history', function() {
         let dispatch = chai.spy()
         let spiedActionCreator = chai.spy(() => ({}))
 
-        const {unListen} = subscribe(history, dispatch)
-            .listen({
-                url: '/index',
-                actionCreator: spiedActionCreator
-            })
+        const unListen = subscribe(history, dispatch, {
+            url: '/index',
+            actionCreator: spiedActionCreator
+        })
         history.update(new Location('/index'))
         history.update(new Location('/'))
         history.update(new Location('/index'))

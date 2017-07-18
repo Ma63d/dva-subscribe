@@ -8,7 +8,7 @@ import pathToRegexp from 'path-to-regexp'
 /**
  * @param {Object} history, react-router history
  * @param {Function} dispatch, dva's dispatch
- * @param {Object} rules, rest arguments, optional,
+ * @param {Object} rules, rest arguments,
  *  * rule {Object}, { url: '...', queries: [...], actionCreator: (...) => {...}, everyTime: true/false }
  *  *   property {String} url
  *          the url pattern, etc '/a/:b/:c/x'
@@ -24,14 +24,12 @@ import pathToRegexp from 'path-to-regexp'
  *          if true, the actionCreator will always be fired and the action it returns will
  *      always be dispatched as long as the url matches the pattern you specified. .
  *
- *  @return {Object} { listen: (...) => {...}, unListen: (...) => {...} }
- *   * property {function} listen, a chainable function to add rule: subscribe(history, dispatch).listen(rule).listen(rule).listen(rule)
- *   * property {function} unListen, a function to stop listening to the url change: const {unListen} = subscribe(history, dispatch).listen({...});unListen();
+ *  @return {function} unListen, a function to stop listening to the url change: const {unListen} = subscribe(history, dispatch).listen({...});unListen();
  * */
 function subscribe (history, dispatch, ...rules) {
     let lastLocation
     let currentLocation
-    const _unSubscribe = history.listen((newLocation) => {
+    return history.listen((newLocation) => {
         lastLocation = currentLocation
         currentLocation = newLocation
         for (let route of rules) {
@@ -68,15 +66,6 @@ function subscribe (history, dispatch, ...rules) {
             }
         }
     })
-    const listen = (...args) => {
-        rules.push(...args)
-        return ret
-    }
-    const ret = {
-        listen,
-        unListen: _unSubscribe
-    }
-    return ret
 }
 
 function _diff (params, lastParams, query, lastQuery, targetQueries) {
