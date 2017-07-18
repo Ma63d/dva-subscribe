@@ -9,18 +9,24 @@ import pathToRegexp from 'path-to-regexp'
  * @param {Object} history, react-router history
  * @param {Function} dispatch, dva's dispatch
  * @param {Object} rules, spread arguments, optional,
- *  * url 规则对象:
- *  *   属性 {String} url       用于匹配 pathname 的 url 规则， 如: '/a/:b/:c/x'
- *  *   属性 {Array}  queries 默认为空数组，你关注的 query 内容， 只有当 url 中的 params 和 queries 部分有变动的时候，才会执行 actionCreator，
- *  当你想要避免 url 中你不关心的 query 变动导致触发不必要的 action 时，这个参数很有用
- *  *   属性 {Function} actionCreator  返回需要 dispatch 的 action，或者 actions 数组，
- *  *   属性 {Boolean}  everyTime 默认为 false ，当 pathname 匹配上时，如果跟上次 pathname 一致，只有当 params 和 queries 变动时，才会 dispatch action，但是如果
- *  你想关闭这个机制、希望任何时候匹配上时都 dispatch action，那么请设置 everyTime 为 true
+ *  * rule {Object}, { url: '...', queries: [...], actionCreator: (...) => {...}, everyTime: true/false }
+ *  *   property {String} url
+ *          the url pattern, etc '/a/:b/:c/x'
+ *  *   property {Array}  queries, optional, default is an empty array
+ *          list the queries you care, etc ['keyword', 'time']. If the pattern matches current url,
+ *      only when queries you list or params are different with last url(if last url also matches the specified pattern)
+ *      will the actionCreator executed and action dispatched, which is useful to avoid unnecessary dispatching.
+ *  *   property {Function} actionCreator
+ *          a function that will return action(s) you want to dispatch when url match
+ *      and params/queries are different(if last url also match).
+ *      It will receive params and queries you speciafied as arguments: actionCreator(...params, ...queries)
+ *  *   property {Boolean}  everyTime, optional, default is false
+ *          if true, the actionCreator will always be fired and the action it returns will
+ *      always be dispatched as long as the url matches the pattern you specified. .
  *
- *  @return {Object} 返回对象
- *   * 返回对象
- *   * 属性 {function} listen 绑定 url 规则对象，且可以链式调用： subscribe(history, dispatch).listen({...}).listen({...}).listen({...})
- *   * 属性 {function} unListen 用于解绑 history 的 listen 操作： const {unListen} = subscribe(history, dispatch).listen({...});unListen();
+ *  @return {Object} { listen: (...) => {...}, unListen: (...) => {...} }
+ *   * property {function} listen, a chainable function to add rule: subscribe(history, dispatch).listen(rule).listen(rule).listen(rule)
+ *   * property {function} unListen, a function to stop listening to the url change: const {unListen} = subscribe(history, dispatch).listen({...});unListen();
  * */
 function subscribe (history, dispatch, ...rules) {
     let lastLocation
