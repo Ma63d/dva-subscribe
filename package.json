@@ -2,7 +2,7 @@
   "name": "dva-subscribe",
   "version": "0.2.0",
   "description": "A helper function to simplify the subscription of history in dva. ",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
     "test": "cross-env NODE_ENV=test nyc mocha test/*.spec.js",
