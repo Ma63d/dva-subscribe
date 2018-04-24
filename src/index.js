@@ -4,6 +4,7 @@
  */
 
 import pathToRegexp from 'path-to-regexp'
+import queryString from 'query-string'
 
 /**
  * @param {Object} history, react-router history
@@ -52,8 +53,9 @@ function subscribe (history, dispatch, ...rules) {
             }
             if (shouldExec) {
                 const queryResult = []
+                const search = queryString.parse(currentLocation.search)
                 for (let query of queries) {
-                    queryResult.push(currentLocation.query[query])
+                    queryResult.push(search[query])
                 }
                 const action = actionCreator && actionCreator(...match.slice(1), ...queryResult)
                 if (Array.isArray(action)) {

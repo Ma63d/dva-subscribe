@@ -48,7 +48,8 @@
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
-    "path-to-regexp": "^1.7.0"
+    "path-to-regexp": "^1.7.0",
+    "query-string": "^6.0.0"
   },
   "peerDependencies": {
     "dva": "^1.0.0"
