@@ -63,7 +63,9 @@ function subscribe (history, dispatch, ...rules) {
                         dispatch(i)
                     }
                 } else {
-                    dispatch(action)
+                    if (action) {
+                        dispatch(action)
+                    }
                 }
             }
         }
