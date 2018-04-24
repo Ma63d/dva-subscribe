@@ -48,7 +48,8 @@ function subscribe (history, dispatch, ...rules) {
                 if (!lastMatch) {
                     shouldExec = true
                 } else {
-                    shouldExec = _diff(match.slice(1), lastMatch.slice(1), currentLocation.query, lastLocation.query, queries)
+                    shouldExec = _diff(match.slice(1), lastMatch.slice(1), queryString.parse(currentLocation.search)
+, queryString.parse(lastLocation.search), queries)
                 }
             }
             if (shouldExec) {
@@ -60,7 +61,9 @@ function subscribe (history, dispatch, ...rules) {
                 const action = actionCreator && actionCreator(...match.slice(1), ...queryResult)
                 if (Array.isArray(action)) {
                     for (let i of action) {
-                        dispatch(i)
+                        if (i) {
+                            dispatch(i)
+                        }
                     }
                 } else {
                     if (action) {
