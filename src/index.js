@@ -48,8 +48,9 @@ function subscribe (history, dispatch, ...rules) {
                 if (!lastMatch) {
                     shouldExec = true
                 } else {
-                    shouldExec = _diff(match.slice(1), lastMatch.slice(1), queryString.parse(currentLocation.search)
-, queryString.parse(lastLocation.search), queries)
+                    const currentQuery = queryString.parse(currentLocation.search);
+                    const lastQuery = queryString.parse(lastLocation.search);
+                    shouldExec = _diff(match.slice(1), lastMatch.slice(1), currentQuery, lastQuery, queries)
                 }
             }
             if (shouldExec) {
